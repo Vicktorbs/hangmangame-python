@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 from numpy import rint
 
@@ -58,7 +59,13 @@ def optionOne():
     play_loop()
 
 def optionTwo():
-    print('Option2')
+    printTitle()
+    print('Ingrese la palabra: ')
+    correctWord = input().replace(" ", "")
+    displayWord = codeWord(correctWord)
+    # print(displayWord)
+    guessTheWord(displayWord, correctWord)
+    play_loop()
 
 def printTitle():
     print('╔╦╗╔╦═══════════════════════╗')
@@ -79,6 +86,7 @@ def printWiningMeassage(correct):
 
 def guessTheWord(word, aws):
     start = 0
+    count = 0
     usedWords = []
     end = len(aws)
     while(word != aws):
@@ -86,29 +94,106 @@ def guessTheWord(word, aws):
         print('Palabra: ', ' '.join(tempWord))
         print('Testing vlues: ', word, aws)
         print('Ingresa una letra')
-        temCharacter = input()[0]
+        temCharacter = input()
+        while len(temCharacter) == 0:
+            print('Ingresa una letra')
+            temCharacter = input()
+        temCharacter = temCharacter[0]
+        time.sleep(1)
         if not(temCharacter in usedWords):
             usedWords.append(temCharacter)
         else:
             print('════════Letra repetida!════════')
+
         if temCharacter in aws:
             characterCount = aws.count(temCharacter)
             start = 0
             for i in range(0,characterCount):
-                # print(temCharacter in aws, characterCount)
-                # print(aws.find(temCharacter, start, end), temCharacter, start, end)
                 changePosition = aws.find(temCharacter, start, end)
                 start = changePosition + 1
                 tempListWord = list(word)
                 tempListWord[changePosition] = temCharacter
                 word = ''.join(tempListWord)
-            # word[aws.index(temCharacter)] = temCharacter
-            # print('Palabra: ', ' '.join(word))
+        else:
+            count += 1
+            errorCount(count, aws)
+
     printWiningMeassage(aws)
 
 def codeWord(word):
     temp = ['_' for i in word]
     return ''.join(temp)
+
+def errorCount(count, correctAws):
+    if count == 1:
+        time.sleep(1)
+        print('════════════════════════════════════════════')
+        print("   _____ \n"
+                "  |     | \n"
+                "  |     O \n"
+                "  |      \n"
+                "  |      \n"
+                "  |      \n"
+                "__|__\n")
+        print("Letra incorrecta")
+        print('════════════════════════════════════════════')
+    elif count == 2:
+        time.sleep(1)
+        print('════════════════════════════════════════════')
+        print("   _____ \n"
+                "  |     | \n"
+                "  |     O \n"
+                "  |     | \n"
+                "  |      \n"
+                "__|__\n")
+        print("Letra incorrecta")
+        print('════════════════════════════════════════════')
+    elif count == 3:
+        time.sleep(1)
+        print('════════════════════════════════════════════')
+        print("   _____ \n"
+                "  |     | \n"
+                "  |     O \n"
+                "  |     |\ \n"
+                "  |      \n"
+                "__|__\n")
+        print("Letra incorrecta")
+        print('════════════════════════════════════════════')
+    elif count == 4:
+        time.sleep(1)
+        print('════════════════════════════════════════════')
+        print("   _____ \n"
+                "  |     | \n"
+                "  |     O \n"
+                "  |    /|\ \n"
+                "  |      \n"
+                "__|__\n")
+        print("Letra incorrecta")
+        print('════════════════════════════════════════════')
+    elif count == 5:
+        time.sleep(1)
+        print('════════════════════════════════════════════')
+        print("   _____ \n"
+                "  |     | \n"
+                "  |     O \n"
+                "  |    /|\ \n"
+                "  |    /  \n"
+                "__|__\n")
+        print("Letra incorrecta")
+        print('════════════════════════════════════════════')
+    elif count == 6:
+        time.sleep(1)
+        print('════════════════════════════════════════════')
+        print("   _____ \n"
+                "  |     | \n"
+                "  |     O \n"
+                "  |    /|\ \n"
+                "  |    / \ \n"
+                "__|__\n")
+        print('La palabra era: ', correctAws)
+        print('════════════════════════════════════════════')
+        print("═══════════Fin del juego, perdiste══════════")
+        print('════════════════════════════════════════════')
 
 if __name__ == "__main__":
     main()
