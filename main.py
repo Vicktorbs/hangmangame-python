@@ -17,7 +17,11 @@ def main():
     printTitle()
     print('Selecciona una opcion: ')
     print_menu(menu_options)
-    optionChosen = int(input())
+    optionChosen = input()
+    while len(optionChosen) == 0:
+        print('Selecciona una opcion: ')
+        optionChosen = input()
+    optionChosen = int(optionChosen)
     if optionChosen == 1:
         optionOne()
         os.system('clear')
@@ -30,15 +34,15 @@ def main():
 
 def play_loop():
     global play_game
-    play_game = input("Do You want to play again? y = yes, n = no \n")
+    play_game = input("Quieres jugar otra vez? y = yes, n = no \n")
     while play_game not in ["y", "n","Y","N"]:
-        play_game = input("Do You want to play again? y = yes, n = no \n")
+        play_game = input("Quieres jugar otra vez? y = yes, n = no \n")
     if play_game == "y":
         main()
     elif play_game == "n":
-        print("Thanks For Playing! We expect you back again!")
+        print("Gracias por jugar, te esperamos de regreso!")
     else:
-        print("Thanks For Playing! We expect you back again!")
+        print("Gracias por jugar, te esperamos de regreso!")
 
 def print_menu(menu_options):
     for key in menu_options.keys():
