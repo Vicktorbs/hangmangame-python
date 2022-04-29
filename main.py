@@ -1,6 +1,8 @@
 import os
 import random
 
+from numpy import rint
+
 
 global displayWord
 global correctWord
@@ -76,8 +78,8 @@ def printWiningMeassage(correct):
     print('════════════════════════════════════════════')
 
 def guessTheWord(word, aws):
-    # aws = [i for i in aws]
     start = 0
+    usedWords = []
     end = len(aws)
     while(word != aws):
         tempWord = [i for i in word]
@@ -85,7 +87,10 @@ def guessTheWord(word, aws):
         print('Testing vlues: ', word, aws)
         print('Ingresa una letra')
         temCharacter = input()[0]
-        # while(temCharacter in aws):
+        if not(temCharacter in usedWords):
+            usedWords.append(temCharacter)
+        else:
+            print('════════Letra repetida!════════')
         if temCharacter in aws:
             characterCount = aws.count(temCharacter)
             start = 0
