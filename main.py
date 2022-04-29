@@ -65,6 +65,16 @@ def printTitle():
     print('║╚╝╚╩═╩╩╬═╠╩╩╩═╩╩╝╠═╠═╩╩╩╩═╝║')
     print('╚═══════╩═╩═══════╩═╩═══════╝')
 
+def printWiningMeassage(correct):
+    print('════════════════════════════════════════════')
+    print('La palabra es => ', correct)
+    print('╔╦══╦═╦═╦╦═╦═╦══╦═╦╦╗')
+    print('║║╔═╣║║║║║║║╚╬╣╠╣═╣║║')
+    print('║║╚╝║╩║║║║╩╠╗║║║║═╬╣║')
+    print('║╚══╩╩╩╩═╩╩╩═╝╚╝╚═╩╝║')
+    print('╚═══════════════════╝')
+    print('════════════════════════════════════════════')
+
 def guessTheWord(word, aws):
     # aws = [i for i in aws]
     start = 0
@@ -72,22 +82,24 @@ def guessTheWord(word, aws):
     while(word != aws):
         tempWord = [i for i in word]
         print('Palabra: ', ' '.join(tempWord))
-        print(word, aws)
+        print('Testing vlues: ', word, aws)
         print('Ingresa una letra')
-        temCharacter = input()
+        temCharacter = input()[0]
         # while(temCharacter in aws):
         if temCharacter in aws:
-            print(temCharacter in aws)
-            print(aws.find(temCharacter, start, end))
-            changePosition = aws.find(temCharacter, start, end)
-            start = changePosition + 1
-            tempListWord = list(word)
-            tempListWord[changePosition] = temCharacter
-            word = ''.join(tempListWord)
+            characterCount = aws.count(temCharacter)
+            start = 0
+            for i in range(0,characterCount):
+                # print(temCharacter in aws, characterCount)
+                # print(aws.find(temCharacter, start, end), temCharacter, start, end)
+                changePosition = aws.find(temCharacter, start, end)
+                start = changePosition + 1
+                tempListWord = list(word)
+                tempListWord[changePosition] = temCharacter
+                word = ''.join(tempListWord)
             # word[aws.index(temCharacter)] = temCharacter
-            print('Palabra: ', ' '.join(word))
-
-            # word = [temCharacter for i in aws if aws[i] == temCharacter]
+            # print('Palabra: ', ' '.join(word))
+    printWiningMeassage(aws)
 
 def codeWord(word):
     temp = ['_' for i in word]
