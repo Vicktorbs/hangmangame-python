@@ -1,6 +1,7 @@
 import random
 import time
 from getpass import getpass
+from weakref import finalize
 
 global displayWord
 global correctWord
@@ -37,8 +38,10 @@ def play_loop():
         main()
     elif play_game == "n":
         print("Gracias por jugar, te esperamos de regreso!")
+        exit()
     else:
         print("Gracias por jugar, te esperamos de regreso!")
+        exit()
 
 def print_menu(menu_options):
     for key in menu_options.keys():
@@ -195,6 +198,7 @@ def errorCount(count, correctAws):
         print('════════════════════════════════════════════')
         print("═══════════Fin del juego, perdiste══════════")
         print('════════════════════════════════════════════')
+        play_loop()
 
 if __name__ == "__main__":
     main()
