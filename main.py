@@ -1,9 +1,6 @@
-import os
 import random
 import time
-
-from numpy import rint
-
+from getpass import getpass
 
 global displayWord
 global correctWord
@@ -24,7 +21,6 @@ def main():
     optionChosen = int(optionChosen)
     if optionChosen == 1:
         optionOne()
-        os.system('clear')
     elif optionChosen == 2:
         optionTwo()
     elif optionChosen == 3:
@@ -65,7 +61,7 @@ def optionOne():
 def optionTwo():
     printTitle()
     print('Ingrese la palabra: ')
-    correctWord = input().replace(" ", "")
+    correctWord = getpass('Palabra: ').replace(" ", "")
     displayWord = codeWord(correctWord)
     # print(displayWord)
     guessTheWord(displayWord, correctWord)
@@ -95,8 +91,9 @@ def guessTheWord(word, aws):
     end = len(aws)
     while(word != aws):
         tempWord = [i for i in word]
+        print('════════════════════════════════════════════')
         print('Palabra: ', ' '.join(tempWord))
-        print('Testing vlues: ', word, aws)
+        # print('Testing vlues: ', word, aws)
         print('Ingresa una letra')
         temCharacter = input()
         while len(temCharacter) == 0:
